@@ -21,7 +21,7 @@ namespace I18NApi.Controllers
         [HttpGet]
         public string Get()
         {
-            var value = string.Format(_localizer["About Title"],1,"THIS IS POST COMMENT");
+            var value = _localizer.GetText("About Title", 1);
            
             return value;
         }
@@ -49,6 +49,13 @@ namespace I18NApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+    }
+        public static class Locali
+    {
+        public static string GetText<T>(this IStringLocalizer<T> localizer, string id, params object[] args) 
+        {
+            return string.Format(localizer[id], args);
         }
     }
 }
